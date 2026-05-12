@@ -1,0 +1,13 @@
+# Task 4.1: Scenario Response
+
+I chose this PR because it was one of the clearest and most self-contained improvements among the available options in the aiokafka GitHub Repository. The features being added seek\_to\_beginning() and seek\_to\_end() solves a very specific usability problem in the Kafka consumer API. Unlike larger PRs that involved deep infrastructure changes or complex distributed coordination logic, this PR focused on improving developer experience while still requiring a solid understanding of asynchronous systems and Kafka consumer behavior. That made it both technically meaningful and easier to reason about from an implementation perspective.
+
+My technical background also made this PR approachable for me. I have experience working with Python and backend oriented projects involving APIs and concurrent execution. Since aiokafka is built heavily around asyncio, I could understand how consumer position management interacts with asynchronous fetch operations and partition assignments. I was also able to follow the purpose of the PR because the feature closely mirrors functionality already present in the official Java Kafka client.
+
+One challenge I anticipate is handling consumer state correctly during partition rebalances. Since Kafka consumers can dynamically gain or lose partition ownership, there is a risk of race conditions where a partition becomes unassigned during a seek operation. Another challenge is ensuring that asynchronous offset updates remain consistent without affecting ongoing fetch tasks.
+
+To overcome these challenges, I would first study the existing consumer lifecycle and partition assignment flow inside the repository. I would carefully trace how offsets are stored and updated before modifying the logic. I would also rely heavily on unit tests and edge-case simulations, especially for invalid partition states and rebalance scenarios. Using incremental testing and logging would help verify that the new methods behave consistently without introducing regressions into existing consumer functionality.
+
+Integrity Declaration
+
+"I declare that all written content in this assessment is my own work, created without the use of AI language models or automated writing tools. All technical analysis and documentation reflects my personal understanding and has been written in my own words."
